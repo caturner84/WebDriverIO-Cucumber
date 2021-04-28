@@ -1,30 +1,31 @@
-var browserConfig = require('./test/utils/browser');
+const browserConfig = require('./test/utils/browser');
 const databaseConfig = require('./test/utils/database.config');
-
-require('babel-register')({
-    presets: ['env']
-});
-
 const yargs = require('yargs');
-const parseCmdArgs = () => {
-    return yargs.argv;
-};
+const chai = require('chai');
 
+const parseCmdArgs = () => yargs.argv;
 const getCmdArgs = () => parseCmdArgs();
 const getRunOnSauce = () => getCmdArgs()['runOnSauce'] || false;
 const getBrowser = () => getCmdArgs()['browserName'] || 'chrome';
 const getOs = () => getCmdArgs()['os'] || 'windows';
 const getThreadCount = () => getCmdArgs()['threadCount'] || 1;
 
-
-var config = {
+const config = {
     specs: [
         './test/features/**/*.feature'
     ],
     exclude: [],
+    specFileRetries: 1,
     maxInstances: getThreadCount(),
-    capabilities: browserConfig.getBrowserConfig(getOs(), getBrowser()),
-    services: browserConfig.getServices(getRunOnSauce()),
+    capabilities: browserConfig.getBrowserConfig(getOs(), getBrowser(), getRunOnSauce()),
+    services: (getRunOnSauce() === 'true') ? ['sauce'] : ['selenium-standalone', {
+    installArgs: {
+        drivers: browserConfig.getDrivers(),
+        },
+    args: {
+        driver: browserConfig.getDrivers(),
+        },
+    }],
     skipSeleniumInstall: false,
     sync: true,
     logLevel: 'silent',
@@ -36,37 +37,17 @@ var config = {
     connectionRetryTimeout: 90000,
     connectionRetryCount: 3,
     framework: 'cucumber',
-    reporters: ['dot', 'multiple-cucumber-html', 'junit'],
-    reporterOptions: {
-        htmlReporter: {
-            jsonFolder: './reports/cucumber-json',
-            reportFolder: './reports/cucumber-html',
-            removeFolders: true,
-            openReportInBrowser: true,
-            disableLog: true,
-            pageTitle: 'webdriverio-cucumber',
-            displayDuration: true,
-            customData: {
-                title: 'Run info',
-                data: [
-                    {label: 'Environment', value: 'local'},
-                    {label: 'Project', value: 'WebDriverio-cucumber'},
-                    {label: 'Release', value: '1.0.0'},
-                    {label: 'Cycle', value: 'Sprint-0'}
-                ]
-            }
-        },
-        junit: {
-            outputDir: './reports/junit'
-        }
-    },
+    reporters: [['cucumberjs-json', {
+        jsonFolder: './reports/cucumber-json',
+        }]],
     cucumberOpts: {
+        requireModule: ['@babel/register'],
         require: ['./test/step_definitions/**/*.js'],        // <string[]> (file/dir) require files before executing features
         backtrace: false,   // <boolean> show full backtrace for errors
         compiler: [],       // <string[]> ("extension:module") require files with the given EXTENSION after requiring MODULE (repeatable)
         dryRun: false,      // <boolean> invoke formatters without executing steps
         failFast: false,    // <boolean> abort the run on first failure
-        format: ['json:report/cucumber-json/'], // <string[]> (type[:path]) specify the output format, optionally supply PATH to redirect formatter output (repeatable)
+        format: [], // <string[]> (type[:path]) specify the output format, optionally supply PATH to redirect formatter output (repeatable)
         colors: true,       // <boolean> disable colors in formatter output
         snippets: true,     // <boolean> hide step definition snippets for pending steps
         source: true,       // <boolean> hide source URIs

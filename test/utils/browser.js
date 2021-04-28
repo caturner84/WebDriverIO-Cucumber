@@ -107,3 +107,9 @@ module.exports.getServices = (runOnSauce) => {
         return ['selenium-standalone', 'sauce'];
     }
 }
+
+module.exports.getDrivers = () => ({
+chrome: {
+version: '89.0.4389.23',
+},
+})
