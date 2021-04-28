@@ -4,7 +4,7 @@ This is the skeleton framework using WebdriverIO and Cucumber to test React base
 #Build and Install
 Clone the repository and open the command prompt/terminal in IDE to install
 ```bash
-git clone https://github.com/siva1711/Webdriverio-Cucumber.git
+git clone https://github.com/caturner84/WebDriverIO-Cucumber.git
 npm install
 ```
 
