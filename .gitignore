@@ -1,1 +1,29 @@
+## Project Specific
+#################
+
+# node/npm
 node_modules
+*.log
+
+# test
+reports/cucumber-html
+reports/cucumber-json
+
+## OSX
+#################
+
+[Tt]humbs.db
+*.DS_Store
+
+## Generic
+#################
+*.tmp
+*.bak
+*.cya
+.yo-rc.json
+
+## Webstorm
+#################
+.idea
+*.iml
+

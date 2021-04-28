@@ -1,14 +1,39 @@
 {
-  "name": "webdriverio-test",
+  "name": "cbp-e2e-tests",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "This is the end to end testing framework for cbp domains",
   "scripts": {
-    "environment": "./node_modules/.bin/wdio wdio.conf.js",
-    "test-local": "npm run environment --"
+    "conf-e1": "./node_modules/.bin/wdio wdio.e1.conf.js",
+    "conf-e2": "./node_modules/.bin/wdio wdio.e2.conf.js",
+    "conf-fis-e0": "./node_modules/.bin/wdio wdio.fise0.conf.js",
+    "conf-fis-e1": "./node_modules/.bin/wdio wdio.fise1.conf.js",
+    "conf-fis-e2": "./node_modules/.bin/wdio wdio.fise2.conf.js",
+    "es-lint": "./node_modules/.bin/eslint --ignore-path .gitignore --ext js,jsx,snap .",
+    "gherkin-lint": "gherkin-lint > ./reports/gherkin-lint-results/results.txt 2>&1",
+    "test-local-e1-integration": "npm run gherkin-lint && npm run es-lint && npm run conf-e1 -- --runOnSauce=false --suite=createPaymentIntegrationTests",
+    "test-local-e1": "npm run gherkin-lint && npm run es-lint && npm run conf-e1 -- --runOnSauce=false --suite=createPaymentTests",
+    "test-local-e2": "npm run gherkin-lint && npm run es-lint && npm run conf-e2 -- --runOnSauce=false --suite=createPaymentTests",
+    "test-jenkins-e1": "npm run gherkin-lint && npm run es-lint && npm run conf-e1 -- --runOnSauce=true",
+    "test-jenkins-e2": "npm run gherkin-lint && npm run es-lint && npm run conf-e2 -- --runOnSauce=true",
+    "test-local-fis-e0": "npm run gherkin-lint && npm run es-lint && npm run conf-fis-e0 -- --runOnSauce=false --suite=fisSierraConfigurationTests",
+    "test-local-fis-e1": "npm run gherkin-lint && npm run es-lint && npm run conf-fis-e1 -- --runOnSauce=false --suite=fisSierraConfigurationTests",
+    "test-local-fis-e2": "npm run gherkin-lint && npm run es-lint && npm run conf-fis-e2 -- --runOnSauce=false --suite=fisSierraConfigurationTests",
+    "test-jenkins-fise1": "npm run gherkin-lint && npm run es-lint && npm run conf-fis-e1 -- --runOnSauce=true",
+    "test-jenkins-fise2": "npm run gherkin-lint && npm run es-lint && npm run conf-fis-e2 -- --runOnSauce=true"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "cbp-e2e-tests",
+    "fis-sierra-e2e-tests",
+    "selenium",
+    "web",
+    "testing",
+    "webdriverio",
+    "cucumber",
+    "saucelabs",
+    "cucumberhtmlreport",
+    "parallelexecution"
+  ],
+  "author": "cbp-qa@aexp.com",
   "license": "ISC",
   "devDependencies": {
     "@babel/cli": "^7.11.6",
@@ -23,17 +48,18 @@
     "@wdio/sauce-service": "^6.6.7",
     "@wdio/selenium-standalone-service": "^6.9.0",
     "@wdio/sync": "^6.6.7",
+    "cbp-test-common-utils": "^2.1.61",
     "chai": "^4.2.0",
-    "chrome-launcher": "^0.13.1",
     "cucumber": "^6.0.5",
     "eslint": "^5.16.0",
+    "eslint-config-amex": "^10.1.0",
     "fibers": "^3.1.1",
     "fs-extra": "^8.1.0",
     "gherkin-lint": "^3.4.0",
-    "multiple-cucumber-html-reporter": "^1.18.0",
+    "multiple-cucumber-html-reporter": "1.18.0",
     "oracledb": "^3.1.2",
     "rimraf": "^3.0.2",
-    "wdio-cucumberjs-json-reporter": "^2.0.2",
+    "wdio-cucumberjs-json-reporter": "2.0.2",
     "yargs": "^16.1.0"
   },
   "dependencies": {
@@ -41,6 +67,6 @@
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://stash.aexp.com/stash/scm/aim600000190/cbp-e2e-tests.git"
   }
 }

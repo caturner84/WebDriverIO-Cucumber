@@ -1,0 +1,22 @@
+{
+  "extends": "amex",
+  "rules": {
+    "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
+    "no-unused-vars": "off",
+    "class-methods-use-this": "off",
+    "no-plusplus": "off",
+    "no-console": "off",
+    "max-len": [2, {"comments": 160,"code": 160,"ignoreStrings": true}],
+    "no-await-in-loop": "off",
+    "no-else-return": "off",
+    "linebreak-style": 0,
+    "complexity": ["error", 35],
+    "no-use-before-define": [2, {"variables": false}]
+  },
+  "globals": {
+    "browser": "writeable",
+    "connection": "writeable",
+    "assert": "writeable",
+    "$": "writeable"
+  }
+}
