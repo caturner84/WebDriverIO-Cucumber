@@ -1,10 +1,10 @@
 const { generate } = require('multiple-cucumber-html-reporter');
 const { removeSync } = require('fs-extra');
+const browserConfig = require('./test/utils/browser');
+const databaseConfig = require('./test/utils/database.config');
+const constants = require('./test/constants/config_constants');
 const yargs = require('yargs');
 const chai = require('chai');
-const databaseConfig = require('./com.aexp.cbp/utils/module_utils/databaseConfig');
-const browserConfig = require('./com.aexp.cbp/utils/browser');
-const constants = require('./com.aexp.cbp/constants/config_constants');
 
 const parseCmdArgs = () => yargs.argv;
 const getCmdArgs = () => parseCmdArgs();
@@ -40,7 +40,7 @@ const config = {
     sync: true,
     logLevel: 'silent',
     coloredLogs: true,
-    baseUrl: 'http://localhost:8080',
+    baseUrl: 'https://webdriver.io',
     waitforTimeout: 60000,
     framework: 'cucumber',
     reporters: [['cucumberjs-json', {
@@ -63,55 +63,26 @@ const config = {
         timeout: 120000, // <number> timeout for step definitions
         ignoreUndefinedDefinitions: false, // <boolean> Enable this config to treat undefined definitions as warnings.
     },
-    onPrepare: async () => {
+     before: function () {
         removeSync('./reports/cucumber-json/');
         removeSync('./reports/cucumber-html/');
-        try {
-            await databaseConfig.getDBConnection();
-        } catch (err) {
-            console.error(`Unable to execute queries ${err}`);
-        }
+        browser.setViewportSize({
+            width: 1280,
+            height: 578
+        })
     },
-    before: async () => {
-        global.assert = chai.assert;
-        try {
-            await databaseConfig.getDBConnection();
-        } catch (err) {
-            console.error(`Unable to connect to the database ${err}`);
-        }
-        browser.setWindowSize(1920, 1080);
-        if (browser.capabilities.browserName === 'chrome' && getRunOnSauce() === 'false') {
-            browser.networkActivity = { http: [] };
-            browser.cdp('Network', 'enable');
-            browser.on('Network.responseReceived', (params) => {
-                if (params.type.toLowerCase() === 'fetch') {
-                    const values = { Response: { url: params.response.url, status: params.response.status, headers: params.response.headers } };
-                    browser.networkActivity.http.push(values);
-                }
-            });
-        }
-        browser.setTimeout({ pageLoad: 30000 });
+    beforeFeature: async function (feature) {
+        await databaseConfig.getDBConnection();
     },
-    afterScenario: () => {
-        browser.deleteCookies();
-    },
-    onComplete: async () => {
-        generate(browserConfig.getReportOptions());
-        try {
-            await paymentRepository.deleteCancellationRequest();
-            await paymentRepository.deleteQuote();
-            await fundingRepository.updateFundingStatus();
-        } catch (err) {
-            console.error(`Unable to execute queries ${err}`);
-        } finally {
-            await databaseConfig.closeConnection();
-        }
-    },
+    after: async function () {
+        await databaseConfig.closeConnection(connection);
+    }
 };
+
 if (getRunOnSauce() === 'true') {
-    config.user = process.env.SAUCE_USERNAME || constants.SAUCE_USERNAME;
-    config.key = process.env.SAUCE_ACCESS_KEY || getSauceKey();
-    config.sauceConnect = true;
+    config.user = 'Sauce user name';
+    config.key = 'Sauce access key';
+    config.sauceConnect = false
 }
 
 exports.config = config;

@@ -21,4 +21,4 @@ module.exports.closeConnection = async function (connection){
             console.error(err);
         }
     }
-}
+};
