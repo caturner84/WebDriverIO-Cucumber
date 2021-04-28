@@ -2,9 +2,9 @@
 const _ = require('lodash');
 const defaults = require('./wdio.default.conf.js').config;
 
-// 'e2' specific overrides:
+// 'e1' specific overrides:
 const overrides = {
-  baseUrl: 'https://qwww.americanexpress.com/en-us/account/cross-border/login?DestPage=https://cross-border-qa.americanexpress.com/home',
+  baseUrl: 'https://webdriver.io/docs/frameworks/',
 };
 
 // Send the merged config to wdio

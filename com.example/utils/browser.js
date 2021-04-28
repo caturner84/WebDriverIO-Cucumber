@@ -18,10 +18,10 @@ const reportMetadataMac = {
 
 const localWindowsChrome = {
   browserName: constants.CHROME,
-  'cjson:metadata': reportMetadataWindows,
-  'goog:chromeOptions': {
-    args: ['--headless', '--disable-gpu', '--lang=en-US'],
-  },
+//  'cjson:metadata': reportMetadataWindows,
+//  'goog:chromeOptions': {
+//    args: ['--headless', '--disable-gpu', '--lang=en-US'],
+//  },
 };
 
 const localWindowsFF = {

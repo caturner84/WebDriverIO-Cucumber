@@ -2,8 +2,8 @@ const { generate } = require('multiple-cucumber-html-reporter');
 const { removeSync } = require('fs-extra');
 const yargs = require('yargs');
 const chai = require('chai');
-const browserConfig = require('./com.aexp.cbp/utils/browser');
-const constants = require('./com.aexp.cbp/constants/config_constants');
+const browserConfig = require('./com.example/utils/browser');
+const constants = require('./com.example/constants/config_constants');
 
 const parseCmdArgs = () => yargs.argv;
 const getCmdArgs = () => parseCmdArgs();
@@ -13,22 +13,11 @@ const getOS = () => getCmdArgs()[constants.OS] || constants.WINDOWS;
 const getThreadCount = () => getCmdArgs()[constants.THREADCOUNT] || 1;
 
 const config = {
-  specs: ['./com.aexp.cbp/features/**/*.feature'],
+  specs: ['./com.example/features/**/*.feature'],
   suites: {
-    createPaymentTests: [
-      './com.aexp.cbp/features/create_payment_validation.feature',
-      './com.aexp.cbp/features/client_login_mycauser_not_enrolled_validation.feature',
-      './com.aexp.cbp/features/payment_cancellation_validation.feature',
-      './com.aexp.cbp/features/recipient_user_journeys.feature',
-    ],
-    createPaymentIntegrationTests: [
-      './com.aexp.cbp/features/create_payment_integration_validation.feature',
-    ],
-    fisSierraConfigurationTests: [
-      './com.aexp.cbp/fis_features/fis_sierra_configuration_1_validation.feature',
-      './com.aexp.cbp/fis_features/fis_sierra_configuration_2_validation.feature',
-      './com.aexp.cbp/fis_features/fis_sierra_configuration_3_validation.feature',
-    ],
+    exampleTests: [
+          './com.example/example_features/example.feature',
+        ],
   },
   exclude: [],
   specFileRetries: 1,
@@ -60,7 +49,7 @@ const config = {
 
   cucumberOpts: {
     requireModule: ['@babel/register'],
-    require: ['./com.aexp.cbp/**/*.js'], // <string[]> (file/dir) require files before executing features
+    require: ['./com.example/**/*.js'], // <string[]> (file/dir) require files before executing features
     backtrace: false, // <boolean> show full backtrace for errors
     compiler: [],
     dryRun: false, // <boolean> invoke formatters without executing steps

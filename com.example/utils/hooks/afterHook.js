@@ -1,4 +1,4 @@
-import { attachImageToCucumberReport } from 'cbp-test-common-utils';
+import { attachImageToCucumberReport } from '../help.js';
 
 const { After } = require('cucumber');
 
