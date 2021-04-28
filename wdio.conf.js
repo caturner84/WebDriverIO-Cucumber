@@ -2,9 +2,9 @@ const { generate } = require('multiple-cucumber-html-reporter');
 const { removeSync } = require('fs-extra');
 const yargs = require('yargs');
 const chai = require('chai');
-const databaseConfig = require('./com.aexp.cbp/utils/module_utils/databaseConfig');
-const browserConfig = require('./com.aexp.cbp/utils/browser');
-const constants = require('./com.aexp.cbp/constants/config_constants');
+const databaseConfig = require('./test/utils/database.Config');
+const browserConfig = require('./test/utils/browser');
+const constants = require('./test/constants/config_constants');
 
 const parseCmdArgs = () => yargs.argv;
 const getCmdArgs = () => parseCmdArgs();
@@ -66,19 +66,9 @@ const config = {
     onPrepare: async () => {
         removeSync('./reports/cucumber-json/');
         removeSync('./reports/cucumber-html/');
-        try {
-            await databaseConfig.getDBConnection();
-        } catch (err) {
-            console.error(`Unable to execute queries ${err}`);
-        }
     },
     before: async () => {
         global.assert = chai.assert;
-        try {
-            await databaseConfig.getDBConnection();
-        } catch (err) {
-            console.error(`Unable to connect to the database ${err}`);
-        }
         browser.setWindowSize(1920, 1080);
         if (browser.capabilities.browserName === 'chrome' && getRunOnSauce() === 'false') {
             browser.networkActivity = { http: [] };
@@ -97,17 +87,9 @@ const config = {
     },
     onComplete: async () => {
         generate(browserConfig.getReportOptions());
-        try {
-            await paymentRepository.deleteCancellationRequest();
-            await paymentRepository.deleteQuote();
-            await fundingRepository.updateFundingStatus();
-        } catch (err) {
-            console.error(`Unable to execute queries ${err}`);
-        } finally {
-            await databaseConfig.closeConnection();
-        }
     },
 };
+
 if (getRunOnSauce() === 'true') {
     config.user = process.env.SAUCE_USERNAME || constants.SAUCE_USERNAME;
     config.key = process.env.SAUCE_ACCESS_KEY || getSauceKey();

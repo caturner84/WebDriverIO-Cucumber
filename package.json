@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "environment": "./node_modules/.bin/wdio wdio.conf3.js",
+    "environment": "./node_modules/.bin/wdio wdio.conf.js",
     "test-local": "npm run environment --"
   },
   "keywords": [],
