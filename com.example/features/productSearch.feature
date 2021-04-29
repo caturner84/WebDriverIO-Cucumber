@@ -5,7 +5,7 @@ Feature: validation of search functionality
     When I search for a product using "<searchValue>" and the search button
     Then I should see a message showing there are no results
 
-  @example11
+  @example
     Examples:
       | searchValue |
       | abc         |

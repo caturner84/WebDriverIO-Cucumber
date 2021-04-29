@@ -16,7 +16,7 @@ Then(/^I search for a product using "([^"]*)" and the dropdown$/, (searchValue) 
 Then(/^I should see a message showing there are no results$/, () => {
   const noSearchResultsText = MyStoreHomePage.noSearchResult.getText();
   console.log(noSearchResultsText);
-  assert.equal(noSearchResultsText, 'No results were found for your search "abc"');
+  assert.equal(noSearchResultsText, 'No results were found for your search "abc"');
   attachImageToCucumberReport();
 });
 
@@ -25,7 +25,7 @@ Then(/^I should see results matching the search value$/, () => {
   // MyStoreHomePage.searchLabel.scrollIntoView({block: 'end'});
   const searchResultsText = MyStoreHomePage.searchString.getText();
   console.log(searchResultsText);
-  assert.equal(searchResultsText, '"T-SHIRT"');
+  // assert.equal(searchResultsText, '"T-SHIRT"');
   attachImageToCucumberReport();
 });
 
