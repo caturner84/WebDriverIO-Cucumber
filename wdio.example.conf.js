@@ -2,9 +2,9 @@
 const _ = require('lodash');
 const defaults = require('./wdio.default.conf.js').config;
 
-// 'e1' specific overrides:
+// apply specific overrides to values used in the default config:
 const overrides = {
-  baseUrl: 'https://webdriver.io/docs/frameworks/',
+  baseUrl: 'http://automationpractice.com/index.php',
 };
 
 // Send the merged config to wdio

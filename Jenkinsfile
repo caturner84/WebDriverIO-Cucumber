@@ -47,7 +47,7 @@ timestamps {
             sh(script:"npm install")
         }
 
-        stage("CBP e2e tests") {
+        stage("test e2e tests") {
             try {
                 // taken from enterprisesharedlibrary runSeleniumTestsOnSauceLabs.groovy - we need to apply the subdir workaround to its code
                /* sauce('69be7b54-c47d-4f08-a316-a6dac2ce28d0') {
@@ -75,15 +75,15 @@ def executeSlackNotify() {
     println "Test suite - ${SUITE_NAME}"
     if (SUITE_NAME == 'createPaymentIntegrationTests' && successful == false) {
         currentBuild.result = 'FAILED'
-        slack.notify("cbp-test-alerts", "Create payment integration tests unstable or failed.\n", "#C15757")
+        slack.notify("test-test-alerts", "Create payment integration tests unstable or failed.\n", "#C15757")
     } else if (SUITE_NAME == 'fisSierraConfigurationTests' && successful == false) {
         currentBuild.result = 'FAILED'
-        slack.notify("cbp-test-alerts", "Fis Sierra configuration tests unstable or failed.\n", "#C15757")
+        slack.notify("test-test-alerts", "Fis Sierra configuration tests unstable or failed.\n", "#C15757")
     } else if (SUITE_NAME == 'createPaymentTests' && successful == false) {
         currentBuild.result = 'FAILED'
         mail to: 'Dave.Rawlinson@aexp.com',
                 subject: "E2E Test Failure: ${currentBuild.fullDisplayName}",
                 body: "End to End Test Failure, click to view the failed build ${env.BUILD_URL}"
-        slack.notify("cbp-test-alerts", "E2E tests unstable or failed.\n","#C15757")
+        slack.notify("test-test-alerts", "E2E tests unstable or failed.\n","#C15757")
     }
 }

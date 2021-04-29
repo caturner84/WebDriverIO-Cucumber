@@ -1,5 +1,5 @@
 import cucumberJson from 'wdio-cucumberjs-json-reporter';
 
-module.exports.attachImageToCucumberReport = () => _wdioCucumberjsJsonReporter.default.attach(browser.takeScreenshot(), 'image/png');
+module.exports.attachImageToCucumberReport = () => cucumberJson.attach(browser.takeScreenshot(), 'image/png');
 
-module.exports.attachDataToCucumberReport = data => _wdioCucumberjsJsonReporter.default.attach(data, 'application/json');
+module.exports.attachDataToCucumberReport = data => cucumberJson.attach(data, 'application/json');

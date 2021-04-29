@@ -1,15 +1,13 @@
 {
-  "name": "WebDriverIOCucumber",
+  "name": "webdriverio-cucumber",
   "version": "1.0.0",
-  "description": "This is an example WebDriverIo + Cucumber project",
+  "description": "This is an example WebDriverIO + Cucumber framework",
   "scripts": {
     "conf-example": "./node_modules/.bin/wdio wdio.example.conf.js",
     "es-lint": "./node_modules/.bin/eslint --ignore-path .gitignore --ext js,jsx,snap .",
     "gherkin-lint": "gherkin-lint > ./reports/gherkin-lint-results/results.txt 2>&1",
     "test-local-fis-e2": "npm run gherkin-lint && npm run es-lint && npm run conf-fis-e2 -- --runOnSauce=false --suite=fisSierraConfigurationTests",
-    "test-jenkins-fise1": "npm run gherkin-lint && npm run es-lint && npm run conf-fis-e1 -- --runOnSauce=true",
-    "test-jenkins-fise2": "npm run gherkin-lint && npm run es-lint && npm run conf-fis-e2 -- --runOnSauce=true",
-    "test-local-example": "npm run conf-example -- --runOnSauce=false --suite=exampleTests"
+    "test-local-example": "npm run gherkin-lint && npm run conf-example -- --runOnSauce=false --suite=exampleTests"
   },
   "keywords": [],
   "author": "Chris Turner",

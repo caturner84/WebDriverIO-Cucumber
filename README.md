@@ -1,6 +1,6 @@
 ## Installation
 ```bash
-git clone 
+git clone https://github.com/caturner84/WebDriverIO-Cucumber.git
 npm install
 ```
 
@@ -9,13 +9,7 @@ After cloning, installing, and building as described above, tests can be run as 
 `Run tests on local browser using below command`
 ```bash
 
-npm run test-local-e1 -- --browserName=safari --os=mac --threadCount=1 --cucumberOpts.tagExpression="@e1" --environment=e1
-```
-
-`Run tests on SauceLabs browser from local using below command`
-
-```bash
-npm run test-local-e1 -- --browserName=safari --os=mac --threadCount=1 --cucumberOpts.tagExpression="@e1" --environment=e1 --runOnSauce=true --sauceAccessKey=secretKey
+npm run test-local-example -- --browserName=chrome --threadCount=1 --cucumberOpts.tagExpression="@example"
 ```
 
 `Please refer package.json to run different test suites and environemnts.`
@@ -44,3 +38,7 @@ Once the report is open, click on feature name link to navigate to specific feat
 All feature files have to follow the same standards and therefore gherkin-linting has been applied by default.
 It is the responsibility of the quality engineer to ensure that linting rules have been followed.
 Gherkin-linting results can be found in reports/gherkin-lint-results.
+
+### more info
+More info on WebDriverIo https://webdriver.io/docs/gettingstarted
+Test site used for project http://automationpractice.com/index.php

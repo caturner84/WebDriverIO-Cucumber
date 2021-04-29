@@ -21,6 +21,6 @@ module.exports.CHROME_MAC_TESTNAME = 'CBP-E2E-tests-running on-mac-chrome';
 module.exports.FF_MAC_TESTNAME = 'CBP-E2E-tests-running on-mac-firefox';
 module.exports.SAFARI_MAC_TESTNAME = 'CBP-E2E-tests-running on-mac-safari';
 module.exports.PROXY = 'http://proxy.aexp.com:8080';
-module.exports.SAUCE_USERNAME = 'AXP_Master_Account';
+module.exports.SAUCE_USERNAME = 'XXX';
 module.exports.SAUCE_ACCESS_KEY = '5289fb47-5ce5-4147-a82f-6741eefdd901';
 module.exports.SELENIUM_VERSION = '3.141.59';

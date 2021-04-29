@@ -3,7 +3,7 @@ const { removeSync } = require('fs-extra');
 const yargs = require('yargs');
 const chai = require('chai');
 const browserConfig = require('./com.example/utils/browser');
-const constants = require('./com.example/constants/config_constants');
+const constants = require('./com.example/constants/configConstants');
 
 const parseCmdArgs = () => yargs.argv;
 const getCmdArgs = () => parseCmdArgs();
@@ -16,8 +16,9 @@ const config = {
   specs: ['./com.example/features/**/*.feature'],
   suites: {
     exampleTests: [
-          './com.example/example_features/example.feature',
-        ],
+      './com.example/features/productSearch.feature',
+      './com.example/features/login.feature',
+    ],
   },
   exclude: [],
   specFileRetries: 1,
@@ -60,7 +61,7 @@ const config = {
     source: true, // <boolean> hide source uris
     profile: [], // <string[]> (name) specify the profile to use
     strict: false, // <boolean> fail if there are any undefined or pending steps
-    tagExpression: '@e1', // <string[]> (expression) only execute the features or scenarios with matching tag name
+    tagExpression: '@example', // <string[]> (expression) only execute the features or scenarios with matching tag name
     timeout: 320000, // <number> timeout for step definitions
     ignoreUndefinedDefinitions: false, // <boolean> Enable this config to treat undefined definitions as warnings.
   },
@@ -71,6 +72,7 @@ const config = {
   before: async () => {
     global.assert = chai.assert;
     browser.setWindowSize(1920, 1080);
+    browser.setTimeout({ pageLoad: 30000 });
   },
   afterScenario: () => {
     browser.deleteCookies();

@@ -1,4 +1,4 @@
-import { attachImageToCucumberReport } from '../help.js';
+import { attachImageToCucumberReport } from '../help';
 
 const { After } = require('cucumber');
 

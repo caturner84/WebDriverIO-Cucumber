@@ -1,4 +1,4 @@
-const constants = require('../constants/config_constants');
+const constants = require('../constants/configConstants');
 
 const reportMetadataWindows = {
   device: constants.WINDOWS,
@@ -193,19 +193,19 @@ module.exports.getReportOptions = () => ({
   reportPath: './reports/cucumber-html/',
   openReportInBrowser: true,
   disableLog: true,
-  pageTitle: 'cbp-e2e-tests-report',
-  reportName: 'cbp-e2e-tests-html-report',
+  pageTitle: 'tests-report',
+  reportName: 'tests-html-report',
   displayDuration: true,
   customData: {
     title: 'Run info',
     data: [
-      { label: 'Environment', value: 'e1' },
-      { label: 'Project', value: 'cbp-e2e-tests' },
+      { label: 'Environment', value: 'environment' },
+      { label: 'Project', value: 'Project Name' },
       { label: 'Release', value: '1.0.0' },
       { label: 'Cycle', value: 'Sprint 0' },
     ],
   },
-  customStyle: './com.aexp.cbp/utils/customStyle.css',
+  customStyle: './com.example/utils/customStyle.css',
   pageFooter: '<div style="margin:0 auto;width:50%;padding:10px;">'
-    + '<p>American Express - Cross Border Payments - End to End Tests Report</p></div>',
+    + '<p>This is an example report</p></div>',
 });
