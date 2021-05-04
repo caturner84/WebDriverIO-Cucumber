@@ -4,7 +4,7 @@ const DRESSES_LINK ='//*[@id="block_top_menu"]/ul/li[2]/a';
 const SEARCH_INPUT = '//*[@id="search_query_top"]';
 const SEARCH = '//*[@id="searchbox"]/button';
 const NO_SEARCH_RESULT = '//*[@id="center_column"]/p';
-const SEARCH_LABEL = '//*[@id="center_column"]/h1/text()';
+const SEARCH_LABEL = '//*[@id="center_column"]/h1';
 const SEARCH_STRING = '//*[@id="center_column"]/h1/span[1]';
 const SEARCH_DROPDOWN = '//*[@id="index"]/div[2]/ul/li';
 
