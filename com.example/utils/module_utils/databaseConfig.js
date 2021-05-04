@@ -25,13 +25,13 @@ const getConnectionDetails = () => {
       return {
         user: 'xxx',
         password: getDbPassword(),
-        connectString: '(DESCRIPTION = (CONNECT_TIMEOUT= 120)(RETRY_COUNT=20)(RETRY_DELAY = 3)(TRANSPORT_CONNECT_TIMEOUT=3s)(ADDRESS_LIST = (LOAD_BALANCE=on)(ADDRESS = (PROTOCOL = TCP)(HOST=PDCBA01P.aexp.com)(PORT=1525)))(CONNECT_DATA=(SERVICE_NAME = xxx)))',
+        connectString: '(DESCRIPTION = (CONNECT_TIMEOUT= 120)(RETRY_COUNT=20)(RETRY_DELAY = 3)(TRANSPORT_CONNECT_TIMEOUT=3s)(ADDRESS_LIST = (LOAD_BALANCE=on)(ADDRESS = (PROTOCOL = TCP)(HOST=)(PORT=1525)))(CONNECT_DATA=(SERVICE_NAME = xxx)))',
       };
     case 'e2':
       return {
         user: 'xxxxx',
         password: getDbPassword(),
-        connectString: '(DESCRIPTION =(CONNECT_TIMEOUT= 120)(RETRY_COUNT=20)(RETRY_DELAY=3)(TRANSPORT_CONNECT_TIMEOUT=3s)(ADDRESS_LIST =(LOAD_BALANCE=on)(ADDRESS = (PROTOCOL = TCP)(HOST=PQCBA01P.aexp.com)(PORT=1526)))(ADDRESS_LIST =(LOAD_BALANCE=on)(ADDRESS = (PROTOCOL = TCP)(HOST=PQCBA01S.aexp.com)(PORT=1526)))(CONNECT_DATA=(SERVICE_NAME = xxx)))',
+        connectString: '(DESCRIPTION =(CONNECT_TIMEOUT= 120)(RETRY_COUNT=20)(RETRY_DELAY=3)(TRANSPORT_CONNECT_TIMEOUT=3s)(ADDRESS_LIST =(LOAD_BALANCE=on)(ADDRESS = (PROTOCOL = TCP)(HOST=)(PORT=1526)))(ADDRESS_LIST =(LOAD_BALANCE=on)(ADDRESS = (PROTOCOL = TCP)(HOST=)(PORT=1526)))(CONNECT_DATA=(SERVICE_NAME = xxx)))',
       };
     default:
       throw new Error(`Database details not found for provided environment ${env}`);

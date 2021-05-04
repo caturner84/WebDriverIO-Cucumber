@@ -4,11 +4,11 @@
 def validEnvironmentList = ["e1", "e2", "fise1", "fise2"]
 def validOsList = ["windows", "mac"]
 def validBrowserList = ["chrome", "firefox", "ie", "edge", "safari", "allBrowsers"]
-def validSuiteList = ["createPaymentTests", "createPaymentIntegrationTests", "fisSierraConfigurationTests"]
+def validSuiteList = ["suite1", "suite2", ]
 def utils = new com.aexp.jenkins.library.Utils()
 
 timestamps {
-    node('Suacelabs_Node') { // real node is misspelled
+    node('Suacelabs_Node') {
 
         if (!validEnvironmentList.contains(ENVIRONMENT)) {
             println("ENVIRONMENT variable must be set to one of ${validEnvironmentList}")
@@ -40,26 +40,16 @@ timestamps {
                 deleteWorkspace = 'false'
             }
 
-            env.SASS_BINARY_SITE = 'https://ci-repo.aexp.com/nodejs/content/sites/npm-remotes/sass/node-sass/releases/download/'
-            env.PHANTOMJS_CDNURL = 'https://ci-repo.aexp.com/nodejs/content/sites/npm-remotes/ariya/phantomjs/downloads/'
-            env.NODEJS_ORG_MIRROR = 'https://ci-repo.aexp.com/nodejs/content/sites/npm-remotes/'
-
             sh(script:"npm install")
         }
 
-        stage("test e2e tests") {
+        stage("tests") {
             try {
-                // taken from enterprisesharedlibrary runSeleniumTestsOnSauceLabs.groovy - we need to apply the subdir workaround to its code
-               /* sauce('69be7b54-c47d-4f08-a316-a6dac2ce28d0') {
-                    sauceconnect(options: '--proxy phxappgwe2-vip.phx.aexp.com:9090 -vv --proxy-tunnel', sauceConnectPath: '', useGeneratedTunnelIdentifier: true, verboseLogging: true) {
-                        successful = sh (script: "npm run test-jenkins-${ENVIRONMENT} -- ${testParams}", returnStatus: true) == 0
-                    }
-                } */
                successful = sh (script: "npm run test-jenkins-${ENVIRONMENT} -- ${testParams}", returnStatus: true) == 0
             } finally {
                 publishHTML(target: [allowMissing: false, keepAll: true, reportDir: '' +
                         './reports/cucumber-html/',
-                                     reportFiles : 'index.html', reportName: 'E2E Tests Report'])
+                                     reportFiles : 'index.html', reportName: 'Tests Report'])
                 step([$class             : 'CucumberReportPublisher', fileIncludePattern: '*.json', jenkinsBasePath: '',
                       jsonReportDirectory: './reports/cucumber-json/']);
             }
@@ -73,17 +63,17 @@ println(" Response: ${response} ")
 
 def executeSlackNotify() {
     println "Test suite - ${SUITE_NAME}"
-    if (SUITE_NAME == 'createPaymentIntegrationTests' && successful == false) {
+    if (SUITE_NAME == 'suite1' && successful == false) {
         currentBuild.result = 'FAILED'
-        slack.notify("test-test-alerts", "Create payment integration tests unstable or failed.\n", "#C15757")
+        slack.notify("test-test-alerts", "integration tests unstable or failed.\n", "#C15757")
     } else if (SUITE_NAME == 'fisSierraConfigurationTests' && successful == false) {
         currentBuild.result = 'FAILED'
-        slack.notify("test-test-alerts", "Fis Sierra configuration tests unstable or failed.\n", "#C15757")
+        slack.notify("test-test-alerts", " tests unstable or failed.\n", "#C15757")
     } else if (SUITE_NAME == 'createPaymentTests' && successful == false) {
         currentBuild.result = 'FAILED'
-        mail to: 'Dave.Rawlinson@aexp.com',
-                subject: "E2E Test Failure: ${currentBuild.fullDisplayName}",
-                body: "End to End Test Failure, click to view the failed build ${env.BUILD_URL}"
-        slack.notify("test-test-alerts", "E2E tests unstable or failed.\n","#C15757")
+        mail to: 'xxx@xxx.com',
+                subject: "Test Failure: ${currentBuild.fullDisplayName}",
+                body: "Test Failure, click to view the failed build ${env.BUILD_URL}"
+        slack.notify("test-test-alerts", "tests unstable or failed.\n","#C15757")
     }
 }

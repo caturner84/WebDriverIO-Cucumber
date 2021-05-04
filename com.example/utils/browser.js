@@ -193,14 +193,14 @@ module.exports.getReportOptions = () => ({
   reportPath: './reports/cucumber-html/',
   openReportInBrowser: true,
   disableLog: true,
-  pageTitle: 'tests-report',
-  reportName: 'tests-html-report',
+  pageTitle: 'automation-practise-test-report',
+  reportName: 'automation-practise-test-report',
   displayDuration: true,
   customData: {
     title: 'Run info',
     data: [
       { label: 'Environment', value: 'environment' },
-      { label: 'Project', value: 'Project Name' },
+      { label: 'Project', value: 'webdriverio-cucumber' },
       { label: 'Release', value: '1.0.0' },
       { label: 'Cycle', value: 'Sprint 0' },
     ],

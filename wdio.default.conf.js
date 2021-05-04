@@ -17,7 +17,8 @@ const config = {
   suites: {
     exampleTests: [
       './com.example/features/productSearch.feature',
-      './com.example/features/login.feature',
+      './com.example/features/myAccount.feature',
+      './com.example/features/checkout.feature',
     ],
   },
   exclude: [],
@@ -40,8 +41,8 @@ const config = {
   deprecationWarnings: true,
   bail: 0,
   baseUrl: 'http://localhost:8080',
-  waitforTimeout: 320000,
-  connectionRetryTimeout: 320000,
+  waitforTimeout: 50000,
+  connectionRetryTimeout: 50000,
   connectionRetryCount: 3,
   framework: 'cucumber',
   reporters: [['cucumberjs-json', {
@@ -62,7 +63,7 @@ const config = {
     profile: [], // <string[]> (name) specify the profile to use
     strict: false, // <boolean> fail if there are any undefined or pending steps
     tagExpression: '@example', // <string[]> (expression) only execute the features or scenarios with matching tag name
-    timeout: 320000, // <number> timeout for step definitions
+    timeout: 30000, // <number> timeout for step definitions
     ignoreUndefinedDefinitions: false, // <boolean> Enable this config to treat undefined definitions as warnings.
   },
   onPrepare: () => {
@@ -71,7 +72,8 @@ const config = {
   },
   before: async () => {
     global.assert = chai.assert;
-    browser.setWindowSize(1920, 1080);
+    // browser.setWindowSize(2520, 1080);
+    browser.maximizeWindow();
     browser.setTimeout({ pageLoad: 30000 });
   },
   afterScenario: () => {

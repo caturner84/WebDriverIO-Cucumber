@@ -6,10 +6,16 @@
     "conf-example": "./node_modules/.bin/wdio wdio.example.conf.js",
     "es-lint": "./node_modules/.bin/eslint --ignore-path .gitignore --ext js,jsx,snap .",
     "gherkin-lint": "gherkin-lint > ./reports/gherkin-lint-results/results.txt 2>&1",
-    "test-local-fis-e2": "npm run gherkin-lint && npm run es-lint && npm run conf-fis-e2 -- --runOnSauce=false --suite=fisSierraConfigurationTests",
     "test-local-example": "npm run gherkin-lint && npm run conf-example -- --runOnSauce=false --suite=exampleTests"
   },
-  "keywords": [],
+  "keywords": [
+    "automation-practise",
+    "testing",
+    "webdriverio",
+    "javascript",
+    "gherkin",
+    "cucumber"
+  ],
   "author": "Chris Turner",
   "license": "ISC",
   "devDependencies": {
@@ -43,6 +49,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://stash.aexp.com/stash/scm/aim600000190/cbp-e2e-tests.git"
+    "url": "https://github.com/caturner84/WebDriverIO-Cucumber.git"
   }
 }

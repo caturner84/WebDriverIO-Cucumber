@@ -9,7 +9,7 @@ After cloning, installing, and building as described above, tests can be run as 
 `Run tests on local browser using below command`
 ```bash
 
-npm run test-local-example -- --browserName=chrome --threadCount=1 --cucumberOpts.tagExpression="@example"
+npm run test-local-example -- --browserName=chrome --threadCount=2 --cucumberOpts.tagExpression="@example"
 ```
 
 `Please refer package.json to run different test suites and environemnts.`
